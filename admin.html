@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Feedback View</title>
+  <style>
+    body {
+      background-color: #f3f4f6;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .form-container, .feedback-list {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    }
+    input[type="password"], button {
+      padding: 10px;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #2563eb;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .feedback {
+      border-top: 1px solid #ccc;
+      padding-top: 15px;
+      margin-top: 15px;
+    }
+    .link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .link a {
+      color: #2563eb;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .error {
+      color: red;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  {% if feedbacks %}
+    <div class="feedback-list">
+      <h2>All Feedbacks</h2>
+      {% for fb in feedbacks %}
+        <div class="feedback">
+          <p><strong>Name:</strong> {{ fb.member }}</p>
+          <p><strong>Project:</strong> {{ fb.project }}</p>
+          <p><strong>Task:</strong> {{ fb.task }}</p>
+          <p><strong>Difficulty:</strong> {{ fb.difficulty }}</p>
+          <p><strong>Comments:</strong> {{ fb.comments }}</p>
+          <p><strong>Date:</strong> {{ fb.date }}</p>
+        </div>
+      {% endfor %}
+      <div class="link">
+        <a href="/change-password">🔐 Change Admin Password</a>
+      </div>
+    </div>
+  {% else %}
+    <div class="form-container">
+      <h2>Manager Login</h2>
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
+      <form method="POST">
+        <input type="password" name="password" placeholder="Enter password" required>
+        <button type="submit">Login</button>
+      </form>
+      <div class="link">
+        <a href="/forgot-password">Forgot Password?</a>
+      </div>
+    </div>
+  {% endif %}
+</body>
+</html>

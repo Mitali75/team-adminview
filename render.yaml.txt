@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: team-feedback
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
